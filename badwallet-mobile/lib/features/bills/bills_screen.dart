@@ -185,10 +185,7 @@ class _Summary extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text(
-                'Total dû',
-                style: TextStyle(color: Colors.white70),
-              ),
+              const Text('Total dû', style: TextStyle(color: Colors.white70)),
               const SizedBox(height: 4),
               Text(
                 Formatters.xof(total),
@@ -395,9 +392,7 @@ class _SelectionBar extends StatelessWidget {
             ),
             const SizedBox(width: AppConstants.spacingSm),
             FilledButton(
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-              ),
+              style: FilledButton.styleFrom(backgroundColor: AppColors.primary),
               onPressed: onPay,
               child: const Text('Payer'),
             ),

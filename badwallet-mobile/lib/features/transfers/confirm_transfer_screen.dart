@@ -125,10 +125,7 @@ class ConfirmTransferScreen extends StatelessWidget {
                 'Vérifiez les informations : un transfert est immédiat et '
                 'définitif.',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.textSecondary,
-                  fontSize: 12,
-                ),
+                style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
               ),
               const SizedBox(height: AppConstants.spacingMd),
               PrimaryButton(
@@ -139,9 +136,7 @@ class ConfirmTransferScreen extends StatelessWidget {
               ),
               const SizedBox(height: AppConstants.spacingSm),
               TextButton(
-                onPressed: isLoading
-                    ? null
-                    : () => Navigator.of(context).pop(),
+                onPressed: isLoading ? null : () => Navigator.of(context).pop(),
                 child: const Text('Modifier'),
               ),
             ],
@@ -173,10 +168,7 @@ class _Row extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: const TextStyle(color: AppColors.textSecondary),
-          ),
+          Text(label, style: const TextStyle(color: AppColors.textSecondary)),
           Text(
             value,
             style: TextStyle(

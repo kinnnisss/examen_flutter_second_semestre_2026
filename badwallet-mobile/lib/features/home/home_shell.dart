@@ -20,7 +20,6 @@ class _HomeShellState extends State<HomeShell> {
 
   @override
   Widget build(BuildContext context) {
-
     final pages = <Widget>[
       DashboardScreen(onSelectTab: _selectTab),
       TransferScreen(onSelectTab: _selectTab),

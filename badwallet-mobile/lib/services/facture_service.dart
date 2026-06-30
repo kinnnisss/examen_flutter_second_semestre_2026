@@ -36,10 +36,7 @@ class FactureService {
   }) async {
     final data = await _client.get(
       ApiEndpoints.facturesByPeriod(_encode(walletCode)),
-      queryParameters: {
-        'debut': _isoDate(debut),
-        'fin': _isoDate(fin),
-      },
+      queryParameters: {'debut': _isoDate(debut), 'fin': _isoDate(fin)},
     );
 
     final list = (data as List<dynamic>? ?? const []);

@@ -30,7 +30,10 @@ class PrimaryButton extends StatelessWidget {
           : Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (icon != null) ...[Icon(icon, size: 20), const SizedBox(width: 8)],
+                if (icon != null) ...[
+                  Icon(icon, size: 20),
+                  const SizedBox(width: 8),
+                ],
                 Text(label),
               ],
             ),

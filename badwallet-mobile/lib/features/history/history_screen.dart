@@ -54,8 +54,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            if (history.hasActiveFilters)
-              _ActiveFiltersBar(history: history),
+            if (history.hasActiveFilters) _ActiveFiltersBar(history: history),
             Expanded(
               child: RefreshIndicator(
                 color: AppColors.primary,
@@ -126,11 +125,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      builder: (_) =>
-          ChangeNotifierProvider<HistoryProvider>.value(
-            value: history,
-            child: const _FilterSheet(),
-          ),
+      builder: (_) => ChangeNotifierProvider<HistoryProvider>.value(
+        value: history,
+        child: const _FilterSheet(),
+      ),
     );
   }
 }
@@ -166,8 +164,7 @@ class _ActiveFiltersBar extends StatelessWidget {
                     (c) => Chip(
                       label: Text(c, style: const TextStyle(fontSize: 12)),
                       visualDensity: VisualDensity.compact,
-                      materialTapTargetSize:
-                          MaterialTapTargetSize.shrinkWrap,
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
                   )
                   .toList(),
@@ -210,8 +207,8 @@ class _FilterSheet extends StatelessWidget {
         left: AppConstants.spacingMd,
         right: AppConstants.spacingMd,
         top: AppConstants.spacingSm,
-        bottom: MediaQuery.of(context).viewInsets.bottom +
-            AppConstants.spacingLg,
+        bottom:
+            MediaQuery.of(context).viewInsets.bottom + AppConstants.spacingLg,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -219,15 +216,12 @@ class _FilterSheet extends StatelessWidget {
         children: [
           Text(
             'Filtrer les transactions',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: AppConstants.spacingMd),
-          const Text(
-            'Type',
-            style: TextStyle(color: AppColors.textSecondary),
-          ),
+          const Text('Type', style: TextStyle(color: AppColors.textSecondary)),
           const SizedBox(height: AppConstants.spacingSm),
           Wrap(
             spacing: 8,
@@ -259,11 +253,8 @@ class _FilterSheet extends StatelessWidget {
                 child: _DateField(
                   label: 'Date de fin',
                   value: history.endDate,
-                  onTap: () => _pickDate(
-                    context,
-                    history.endDate,
-                    history.setEndDate,
-                  ),
+                  onTap: () =>
+                      _pickDate(context, history.endDate, history.setEndDate),
                   onClear: () => history.setEndDate(null),
                 ),
               ),

@@ -49,14 +49,10 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-
       final wallet = await _walletService.getWallet(phone);
 
       await _storage.write(AppConstants.storageKeyPhone, wallet.phoneNumber);
-      await _storage.write(
-        AppConstants.storageKeyWalletCode,
-        wallet.code,
-      );
+      await _storage.write(AppConstants.storageKeyWalletCode, wallet.code);
       _phoneNumber = wallet.phoneNumber;
       _walletCode = wallet.code;
       _isLoading = false;

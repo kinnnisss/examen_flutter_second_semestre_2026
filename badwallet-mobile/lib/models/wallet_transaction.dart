@@ -37,6 +37,7 @@ enum TransactionType {
 }
 
 enum TransactionDirection { credit, debit, neutral }
+
 class WalletTransaction {
   const WalletTransaction({
     required this.id,

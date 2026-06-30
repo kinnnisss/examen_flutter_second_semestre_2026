@@ -33,7 +33,6 @@ class DashboardProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-
       final results = await Future.wait([
         _walletService.getBalance(phone),
         _walletService.getTransactions(phone),

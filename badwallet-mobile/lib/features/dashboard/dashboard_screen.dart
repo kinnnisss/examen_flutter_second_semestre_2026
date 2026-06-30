@@ -58,7 +58,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     DashboardProvider dashboard,
     String phone,
   ) {
-
     if (dashboard.error != null && !dashboard.hasData) {
       return _scrollable(
         AppErrorState(message: dashboard.error!, onRetry: _load),
@@ -114,16 +113,16 @@ class _Greeting extends StatelessWidget {
       children: [
         Text(
           'Bonjour 👋',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: 2),
         Text(
           Formatters.phoneSenegal(phone),
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
         ),
       ],
     );
@@ -294,9 +293,9 @@ class _RecentHeader extends StatelessWidget {
       children: [
         Text(
           'Transactions récentes',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
         TextButton(onPressed: onSeeAll, child: const Text('Voir tout')),
       ],

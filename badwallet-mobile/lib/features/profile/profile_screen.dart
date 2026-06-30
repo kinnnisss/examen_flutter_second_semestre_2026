@@ -73,9 +73,9 @@ class ProfileScreen extends StatelessWidget {
           Center(
             child: Text(
               Formatters.phoneSenegal(phone),
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
             ),
           ),
           const SizedBox(height: AppConstants.spacingXl),
@@ -124,10 +124,7 @@ class _InfoTile extends StatelessWidget {
         leading: Icon(icon, color: AppColors.primary),
         title: Text(
           label,
-          style: const TextStyle(
-            color: AppColors.textSecondary,
-            fontSize: 12,
-          ),
+          style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
         ),
         subtitle: Text(
           value,

@@ -101,15 +101,14 @@ class _TransferScreenState extends State<TransferScreen> {
                 _SenderCard(
                   phone: senderPhone,
                   balance: balance?.balance,
-                  currency:
-                      balance?.currency ?? AppConstants.defaultCurrency,
+                  currency: balance?.currency ?? AppConstants.defaultCurrency,
                 ),
                 const SizedBox(height: AppConstants.spacingLg),
                 Text(
                   'Destinataire',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: AppConstants.spacingSm),
                 TextFormField(
@@ -127,17 +126,15 @@ class _TransferScreenState extends State<TransferScreen> {
                 const SizedBox(height: AppConstants.spacingLg),
                 Text(
                   'Montant',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: AppConstants.spacingSm),
                 TextFormField(
                   controller: _amountController,
                   keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w700,
@@ -211,10 +208,7 @@ class _SenderCard extends StatelessWidget {
             children: [
               const Text(
                 'Solde',
-                style: TextStyle(
-                  color: AppColors.textSecondary,
-                  fontSize: 12,
-                ),
+                style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
               ),
               Text(
                 balance == null

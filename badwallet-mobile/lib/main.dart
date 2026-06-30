@@ -41,10 +41,8 @@ class BadWalletApp extends StatelessWidget {
         Provider<FactureService>.value(value: factureService),
 
         ChangeNotifierProvider<AuthProvider>(
-          create: (_) => AuthProvider(
-            storage: storage,
-            walletService: walletService,
-          ),
+          create: (_) =>
+              AuthProvider(storage: storage, walletService: walletService),
         ),
 
         ChangeNotifierProvider<DashboardProvider>(
