@@ -6,8 +6,10 @@ import 'core/constants/app_constants.dart';
 import 'core/network/api_client.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/secure_storage_service.dart';
-import 'features/dashboard/dashboard_screen.dart';
-import 'providers/session_provider.dart';
+import 'features/splash/splash_screen.dart';
+import 'providers/auth_provider.dart';
+import 'providers/dashboard_provider.dart';
+import 'services/wallet_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,27 +25,36 @@ class BadWalletApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Services partagés (singletons applicatifs) injectés via Provider.
+    // Services partagés (singletons applicatifs).
     final storage = SecureStorageService();
+    final apiClient = ApiClient();
+    final walletService = WalletService(apiClient);
 
     return MultiProvider(
       providers: [
-        // Client HTTP unique partagé par tous les services métier.
-        Provider<ApiClient>(create: (_) => ApiClient()),
-
-        // Service de stockage sécurisé.
+        // Infrastructure réseau / stockage.
+        Provider<ApiClient>.value(value: apiClient),
         Provider<SecureStorageService>.value(value: storage),
+        Provider<WalletService>.value(value: walletService),
 
-        // État de session (numéro de wallet courant), chargé au démarrage.
-        ChangeNotifierProvider<SessionProvider>(
-          create: (_) => SessionProvider(storage)..load(),
+        // Identité du client (login simulé par numéro de téléphone).
+        ChangeNotifierProvider<AuthProvider>(
+          create: (_) => AuthProvider(
+            storage: storage,
+            walletService: walletService,
+          ),
+        ),
+
+        // Données du tableau de bord (solde + transactions).
+        ChangeNotifierProvider<DashboardProvider>(
+          create: (_) => DashboardProvider(walletService),
         ),
       ],
       child: MaterialApp(
         title: AppConstants.appName,
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light(),
-        home: const DashboardScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
