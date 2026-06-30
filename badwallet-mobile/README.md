@@ -148,18 +148,3 @@ Pour cibler un téléphone physique avec une IP précise :
 flutter build apk --release --dart-define=API_BASE_URL=http://192.168.1.10:8080
 ```
 
-## Limites connues (liées au backend / environnement)
-
-- **Paiement de factures** : BadWallet API n'expose **aucune** route de paiement
-  (`/pay`, `/pay-factures` inexistantes) et ne crée jamais de transaction
-  `BILL_PAYMENT`. Le wallet n'est donc **pas débité** lors d'un paiement de
-  facture, et l'« Historique des factures » reste vide. L'app affiche un message
-  clair sans simuler de paiement. Dès qu'un proxy `POST /api/wallets/pay-factures`
-  existera côté backend, le flux est prêt à être câblé.
-- **Login simulé** : pas d'authentification JWT (identité = numéro vérifié via l'API).
-- **Filtres factures par date** : appliqués côté client (l'endpoint ne pagine pas).
-- **Icône de lancement** : la configuration `flutter_launcher_icons` est prête ;
-  fournir `assets/icon/icon.png` (1024×1024) puis exécuter
-  `flutter pub run flutter_launcher_icons` pour générer les icônes natives.
-- **Release signé avec la clé debug** : suffisant pour une démo académique ;
-  fournir un keystore pour une vraie distribution.
