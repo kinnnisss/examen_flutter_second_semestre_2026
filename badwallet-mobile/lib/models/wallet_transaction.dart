@@ -21,7 +21,6 @@ enum TransactionType {
     }
   }
 
-  /// Libellé français pour l'UI.
   String get label {
     switch (this) {
       case TransactionType.deposit:
@@ -36,28 +35,9 @@ enum TransactionType {
         return 'Transaction';
     }
   }
-
-  /// `true` si la transaction augmente le solde (entrée d'argent).
-  bool get isCredit => this == TransactionType.deposit;
 }
 
-/// Modèle `WalletTransaction`, miroir du `TransactionResponse` du backend.
-///
-/// Réponse réelle (GET /api/wallets/{phoneNumber}/transactions) — liste :
-/// ```json
-/// [
-///   {
-///     "id": 10,
-///     "type": "TRANSFER",
-///     "amount": 5000.00,
-///     "fee": 0.00,
-///     "currency": "XOF",
-///     "paymentMethod": null,
-///     "description": "Transfert vers +221770000000",
-///     "createdAt": "2026-06-30T12:00:00"
-///   }
-/// ]
-/// ```
+enum TransactionDirection { credit, debit, neutral }
 class WalletTransaction {
   const WalletTransaction({
     required this.id,
@@ -81,6 +61,50 @@ class WalletTransaction {
 
   /// Type brut conservé tel quel pour le débogage / l'affichage avancé.
   String get rawType => type.name;
+
+  /// Sens de la transaction, déduit uniquement de données fiables du backend.
+  ///
+  ///  • DEPOSIT                       -> crédit (vert)
+  ///  • WITHDRAWAL / BILL_PAYMENT     -> débit (rouge)
+  ///  • TRANSFER                      -> selon la description :
+  ///        "Transfert reçu..."   -> crédit
+  ///        "Transfert envoyé..." -> débit
+  ///        sinon                 -> neutre (on ne devine pas)
+  TransactionDirection get direction {
+    switch (type) {
+      case TransactionType.deposit:
+        return TransactionDirection.credit;
+      case TransactionType.withdrawal:
+      case TransactionType.billPayment:
+        return TransactionDirection.debit;
+      case TransactionType.transfer:
+        final d = (description ?? '').toLowerCase();
+        if (d.contains('reçu') || d.contains('recu')) {
+          return TransactionDirection.credit;
+        }
+        if (d.contains('envoyé') || d.contains('envoye')) {
+          return TransactionDirection.debit;
+        }
+        return TransactionDirection.neutral;
+      case TransactionType.unknown:
+        return TransactionDirection.neutral;
+    }
+  }
+
+  /// Libellé affiché, précisant le sens d'un transfert quand il est connu.
+  String get displayLabel {
+    if (type == TransactionType.transfer) {
+      switch (direction) {
+        case TransactionDirection.credit:
+          return 'Transfert reçu';
+        case TransactionDirection.debit:
+          return 'Transfert envoyé';
+        case TransactionDirection.neutral:
+          return 'Transfert';
+      }
+    }
+    return type.label;
+  }
 
   factory WalletTransaction.fromJson(Map<String, dynamic> json) {
     return WalletTransaction(

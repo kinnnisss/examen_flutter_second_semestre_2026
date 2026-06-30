@@ -8,8 +8,6 @@ import 'package:badwallet_mobile/models/wallet_transaction.dart';
 void main() {
   group('Formatters', () {
     test('xof formate un montant sans decimale avec separateur de milliers', () {
-      // NumberFormat fr_FR utilise une espace insecable (U+202F/U+00A0) comme
-      // separateur de milliers : on normalise toute espace en espace simple.
       final result = Formatters.xof(150000).replaceAll(RegExp(r'\s'), ' ');
       expect(result, '150 000 FCFA');
     });
@@ -54,6 +52,42 @@ void main() {
 
       expect(tx.type, TransactionType.transfer);
       expect(tx.type.label, 'Transfert');
+    });
+
+    test('direction d\'un transfert deduite de la description (envoye/recu)', () {
+      WalletTransaction tx(String desc) => WalletTransaction.fromJson({
+        'id': 1,
+        'type': 'TRANSFER',
+        'amount': 2000.0,
+        'fee': 0.0,
+        'currency': 'XOF',
+        'description': desc,
+        'createdAt': '2026-06-30T12:00:00',
+      });
+
+      expect(
+        tx('Transfert envoyé vers le wallet W2').direction,
+        TransactionDirection.debit,
+      );
+      expect(
+        tx('Transfert reçu depuis le wallet W1').direction,
+        TransactionDirection.credit,
+      );
+      expect(tx('Transfert').direction, TransactionDirection.neutral);
+    });
+
+    test('direction depot/retrait', () {
+      WalletTransaction tx(String type) => WalletTransaction.fromJson({
+        'id': 1,
+        'type': type,
+        'amount': 1000.0,
+        'fee': 0.0,
+        'currency': 'XOF',
+        'createdAt': '2026-06-30T12:00:00',
+      });
+
+      expect(tx('DEPOSIT').direction, TransactionDirection.credit);
+      expect(tx('WITHDRAWAL').direction, TransactionDirection.debit);
     });
 
     test('PageResponse.fromJson mappe le contenu pagine', () {

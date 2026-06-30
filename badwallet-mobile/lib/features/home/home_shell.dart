@@ -6,10 +6,6 @@ import '../history/history_screen.dart';
 import '../profile/profile_screen.dart';
 import '../transfers/transfer_screen.dart';
 
-/// Coquille principale de l'application après connexion : héberge les 5 onglets
-/// et la BottomNavigationBar moderne.
-///
-/// Index : 0=Accueil, 1=Transfert, 2=Factures, 3=Historique, 4=Profil.
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 
@@ -27,7 +23,7 @@ class _HomeShellState extends State<HomeShell> {
     // IndexedStack conserve l'état de chaque onglet lors des changements.
     final pages = <Widget>[
       DashboardScreen(onSelectTab: _selectTab),
-      const TransferScreen(),
+      TransferScreen(onSelectTab: _selectTab),
       const BillsScreen(),
       const HistoryScreen(),
       const ProfileScreen(),

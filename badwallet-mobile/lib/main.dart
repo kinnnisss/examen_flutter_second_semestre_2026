@@ -9,12 +9,13 @@ import 'core/utils/secure_storage_service.dart';
 import 'features/splash/splash_screen.dart';
 import 'providers/auth_provider.dart';
 import 'providers/dashboard_provider.dart';
+import 'providers/history_provider.dart';
+import 'providers/transfers_provider.dart';
 import 'services/wallet_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialise les données de localisation FR pour intl (dates, mois).
   await initializeDateFormatting('fr_FR');
 
   runApp(const BadWalletApp());
@@ -25,19 +26,16 @@ class BadWalletApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Services partagés (singletons applicatifs).
     final storage = SecureStorageService();
     final apiClient = ApiClient();
     final walletService = WalletService(apiClient);
 
     return MultiProvider(
       providers: [
-        // Infrastructure réseau / stockage.
         Provider<ApiClient>.value(value: apiClient),
         Provider<SecureStorageService>.value(value: storage),
         Provider<WalletService>.value(value: walletService),
 
-        // Identité du client (login simulé par numéro de téléphone).
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(
             storage: storage,
@@ -45,9 +43,16 @@ class BadWalletApp extends StatelessWidget {
           ),
         ),
 
-        // Données du tableau de bord (solde + transactions).
         ChangeNotifierProvider<DashboardProvider>(
           create: (_) => DashboardProvider(walletService),
+        ),
+
+        ChangeNotifierProvider<HistoryProvider>(
+          create: (_) => HistoryProvider(walletService),
+        ),
+
+        ChangeNotifierProvider<TransfersProvider>(
+          create: (_) => TransfersProvider(walletService),
         ),
       ],
       child: MaterialApp(
