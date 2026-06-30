@@ -1,0 +1,51 @@
+name: badwallet_mobile
+description: "BadWallet — application mobile Flutter Consumer (Wave/Orange Money like)."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # Réseau / API
+  dio: ^5.7.0
+
+  # State management
+  provider: ^6.1.2
+
+  # Formatage (montants XOF, dates)
+  intl: ^0.20.2
+
+  # Typographie moderne (Poppins / Inter)
+  google_fonts: ^6.2.1
+
+  # Stockage sécurisé (token, numéro de wallet courant)
+  flutter_secure_storage: ^9.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+  # Génération des icônes de lancement
+  flutter_launcher_icons: ^0.14.1
+
+flutter:
+  uses-material-design: true
+
+# Configuration des icônes de lancement.
+# Placez un logo dans assets/icon/icon.png puis exécutez :
+#   flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/icon/icon.png"
+  min_sdk_android: 21
