@@ -11,13 +11,9 @@ import '../../providers/auth_provider.dart';
 import '../../providers/dashboard_provider.dart';
 import '../history/transaction_tile.dart';
 
-/// Onglet "Accueil" : salutation, solde, actions rapides et dernières
-/// transactions. Les données sont rafraîchies via [DashboardProvider].
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key, required this.onSelectTab});
 
-  /// Permet de changer d'onglet depuis le Dashboard (actions rapides,
-  /// "Voir tout"). Index : 1=Transfert, 2=Factures, 3=Historique.
   final ValueChanged<int> onSelectTab;
 
   @override
@@ -30,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    // Charge le solde + transactions dès l'ouverture, après le 1er frame.
+
     WidgetsBinding.instance.addPostFrameCallback((_) => _load());
   }
 
@@ -62,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     DashboardProvider dashboard,
     String phone,
   ) {
-    // Erreur uniquement si aucune donnée déjà affichée (sinon on garde l'UI).
+
     if (dashboard.error != null && !dashboard.hasData) {
       return _scrollable(
         AppErrorState(message: dashboard.error!, onRetry: _load),
@@ -94,7 +90,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  /// Enveloppe un contenu non scrollable pour conserver le pull-to-refresh.
   Widget _scrollable(Widget child) {
     return LayoutBuilder(
       builder: (context, constraints) => SingleChildScrollView(

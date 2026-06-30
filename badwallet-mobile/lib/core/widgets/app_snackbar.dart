@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_colors.dart';
 
-/// Système de messages unifié (succès / erreur / info) basé sur les SnackBars.
-///
-/// Usage : `AppSnackBar.success(context, 'Transfert effectué')`.
 class AppSnackBar {
   const AppSnackBar._();
 

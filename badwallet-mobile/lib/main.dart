@@ -8,9 +8,11 @@ import 'core/theme/app_theme.dart';
 import 'core/utils/secure_storage_service.dart';
 import 'features/splash/splash_screen.dart';
 import 'providers/auth_provider.dart';
+import 'providers/bills_provider.dart';
 import 'providers/dashboard_provider.dart';
 import 'providers/history_provider.dart';
 import 'providers/transfers_provider.dart';
+import 'services/facture_service.dart';
 import 'services/wallet_service.dart';
 
 Future<void> main() async {
@@ -29,12 +31,14 @@ class BadWalletApp extends StatelessWidget {
     final storage = SecureStorageService();
     final apiClient = ApiClient();
     final walletService = WalletService(apiClient);
+    final factureService = FactureService(apiClient);
 
     return MultiProvider(
       providers: [
         Provider<ApiClient>.value(value: apiClient),
         Provider<SecureStorageService>.value(value: storage),
         Provider<WalletService>.value(value: walletService),
+        Provider<FactureService>.value(value: factureService),
 
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(
@@ -53,6 +57,10 @@ class BadWalletApp extends StatelessWidget {
 
         ChangeNotifierProvider<TransfersProvider>(
           create: (_) => TransfersProvider(walletService),
+        ),
+
+        ChangeNotifierProvider<BillsProvider>(
+          create: (_) => BillsProvider(factureService),
         ),
       ],
       child: MaterialApp(

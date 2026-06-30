@@ -4,9 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_constants.dart';
 
-/// Thème Material 3 de BadWallet, inspiré des wallets modernes.
-///
-/// Typographie : Poppins (Google Fonts). Couleurs : voir [AppColors].
 class AppTheme {
   const AppTheme._();
 

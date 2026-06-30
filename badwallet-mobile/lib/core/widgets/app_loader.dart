@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_constants.dart';
 
-/// Indicateur de chargement centré et homogène dans toute l'application.
 class AppLoader extends StatelessWidget {
   const AppLoader({super.key, this.message});
 

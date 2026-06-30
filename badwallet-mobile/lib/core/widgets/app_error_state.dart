@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_constants.dart';
 
-/// État d'erreur plein écran, avec bouton « Réessayer » optionnel.
-///
-/// Utilisé quand un appel API échoue (réseau, 404, 500...).
 class AppErrorState extends StatelessWidget {
   const AppErrorState({
     super.key,

@@ -10,11 +10,6 @@ import '../../core/widgets/primary_button.dart';
 import '../../providers/auth_provider.dart';
 import '../home/home_shell.dart';
 
-/// Écran d'onboarding / connexion simulée.
-///
-/// L'utilisateur saisit son numéro de téléphone (identifiant principal). On
-/// valide le format sénégalais, puis [AuthProvider.login] vérifie l'existence
-/// du wallet via l'API avant d'enregistrer le numéro et d'ouvrir le Dashboard.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 

@@ -1,9 +1,5 @@
 import '../network/api_exception.dart';
 
-/// Transforme une erreur (typiquement [ApiException]) en message affichable.
-///
-/// Si l'API a renvoyé des erreurs de validation champ par champ, elles sont
-/// concaténées de façon lisible.
 class ErrorMessages {
   const ErrorMessages._();
 

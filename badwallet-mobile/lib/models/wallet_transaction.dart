@@ -1,4 +1,3 @@
-/// Type de transaction, miroir de l'enum `TransactionType` du backend.
 enum TransactionType {
   deposit,
   withdrawal,
@@ -59,17 +58,8 @@ class WalletTransaction {
   final String? description;
   final DateTime? createdAt;
 
-  /// Type brut conservé tel quel pour le débogage / l'affichage avancé.
   String get rawType => type.name;
 
-  /// Sens de la transaction, déduit uniquement de données fiables du backend.
-  ///
-  ///  • DEPOSIT                       -> crédit (vert)
-  ///  • WITHDRAWAL / BILL_PAYMENT     -> débit (rouge)
-  ///  • TRANSFER                      -> selon la description :
-  ///        "Transfert reçu..."   -> crédit
-  ///        "Transfert envoyé..." -> débit
-  ///        sinon                 -> neutre (on ne devine pas)
   TransactionDirection get direction {
     switch (type) {
       case TransactionType.deposit:
@@ -91,7 +81,6 @@ class WalletTransaction {
     }
   }
 
-  /// Libellé affiché, précisant le sens d'un transfert quand il est connu.
   String get displayLabel {
     if (type == TransactionType.transfer) {
       switch (direction) {

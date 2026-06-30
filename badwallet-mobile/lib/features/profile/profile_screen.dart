@@ -9,7 +9,6 @@ import '../../providers/auth_provider.dart';
 import '../../providers/dashboard_provider.dart';
 import '../auth/login_screen.dart';
 
-/// Onglet "Profil" : informations du client et déconnexion (avec confirmation).
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -38,7 +37,6 @@ class ProfileScreen extends StatelessWidget {
 
     if (confirmed != true || !context.mounted) return;
 
-    // Réinitialise les données puis efface la session.
     context.read<DashboardProvider>().reset();
     await context.read<AuthProvider>().logout();
 

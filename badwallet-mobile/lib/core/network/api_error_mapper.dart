@@ -2,19 +2,6 @@ import 'package:dio/dio.dart';
 
 import 'api_exception.dart';
 
-/// Convertit les [DioException] en [ApiException] avec un message en français.
-///
-/// L'API BadWallet renvoie un corps d'erreur structuré (voir backend
-/// `ApiErrorResponse`) :
-/// ```json
-/// {
-///   "timestamp": "2026-06-30T12:00:00",
-///   "status": 400,
-///   "error": "Bad Request",
-///   "message": "Solde insuffisant.",
-///   "validationErrors": { "amount": "Le montant doit être > 0." }
-/// }
-/// ```
 class ApiErrorMapper {
   const ApiErrorMapper._();
 

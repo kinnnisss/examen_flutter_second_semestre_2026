@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_constants.dart';
 
-/// État vide réutilisable (aucune transaction, aucune facture...).
 class EmptyState extends StatelessWidget {
   const EmptyState({
     super.key,

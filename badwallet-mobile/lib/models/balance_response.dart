@@ -1,14 +1,3 @@
-/// Modèle `BalanceResponse`, miroir du `WalletBalanceResponse` du backend.
-///
-/// Réponse réelle (GET /api/wallets/{phoneNumber}/balance) :
-/// ```json
-/// {
-///   "phoneNumber": "+221779998877",
-///   "code": "WALLET01",
-///   "currency": "XOF",
-///   "balance": 150000.00
-/// }
-/// ```
 class BalanceResponse {
   const BalanceResponse({
     required this.phoneNumber,

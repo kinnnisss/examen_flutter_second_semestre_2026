@@ -7,10 +7,6 @@ import '../../providers/auth_provider.dart';
 import '../auth/login_screen.dart';
 import '../home/home_shell.dart';
 
-/// Écran de démarrage : affiche l'identité BadWallet, charge la session
-/// depuis le stockage sécurisé, puis redirige :
-///   • vers le Dashboard (HomeShell) si un numéro est déjà enregistré ;
-///   • vers le Login / Onboarding sinon.
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -42,7 +38,6 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> _bootstrap() async {
     final auth = context.read<AuthProvider>();
 
-    // Charge la session persistée + petite temporisation pour l'animation.
     await Future.wait([
       auth.loadSession(),
       Future<void>.delayed(const Duration(milliseconds: 1400)),

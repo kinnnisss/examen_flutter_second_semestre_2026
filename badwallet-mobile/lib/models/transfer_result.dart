@@ -1,4 +1,3 @@
-
 class TransferResult {
   const TransferResult({
     required this.senderTransactionId,

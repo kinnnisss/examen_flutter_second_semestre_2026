@@ -1,7 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-/// Fine surcouche autour de [FlutterSecureStorage] pour le stockage sécurisé
-/// (numéro de wallet courant, et plus tard un éventuel token).
 class SecureStorageService {
   SecureStorageService([FlutterSecureStorage? storage])
     : _storage = storage ?? const FlutterSecureStorage();

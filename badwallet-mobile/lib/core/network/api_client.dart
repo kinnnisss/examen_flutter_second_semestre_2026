@@ -5,17 +5,6 @@ import '../config/api_config.dart';
 import 'api_error_mapper.dart';
 import 'api_exception.dart';
 
-/// Client HTTP centralisé de BadWallet, basé sur Dio.
-///
-/// Responsabilités :
-///  • baseUrl unique ([ApiConfig.baseUrl]) ;
-///  • timeouts configurés ;
-///  • logs utiles uniquement en mode debug (via `kDebugMode`) ;
-///  • intercepteur affichant URL, statut et message en cas d'erreur ;
-///  • conversion de toute erreur en [ApiException] propre.
-///
-/// Les services métier reçoivent une instance d'[ApiClient] et n'utilisent
-/// jamais d'URL en dur.
 class ApiClient {
   ApiClient({Dio? dio}) : _dio = dio ?? Dio() {
     _dio
@@ -34,15 +23,13 @@ class ApiClient {
 
   final Dio _dio;
 
-  /// Exposé pour d'éventuels usages avancés (ex. annulation), à utiliser avec
-  /// parcimonie. Les services doivent privilégier les méthodes ci-dessous.
   Dio get raw => _dio;
 
   InterceptorsWrapper _loggingAndErrorInterceptor() {
     return InterceptorsWrapper(
       onRequest: (options, handler) {
         if (kDebugMode) {
-          debugPrint('➡️  [BadWallet] ${options.method} ${options.uri}');
+          debugPrint(' [BadWallet] ${options.method} ${options.uri}');
           if (options.data != null) {
             debugPrint('    body: ${options.data}');
           }
@@ -52,28 +39,25 @@ class ApiClient {
       onResponse: (response, handler) {
         if (kDebugMode) {
           debugPrint(
-            '✅ [BadWallet] ${response.statusCode} '
+            ' [BadWallet] ${response.statusCode} '
             '${response.requestOptions.method} ${response.requestOptions.uri}',
           );
         }
         handler.next(response);
       },
       onError: (error, handler) {
-        // Log clair : URL, statut, message — uniquement en debug.
         if (kDebugMode) {
           final status = error.response?.statusCode;
           final uri = error.requestOptions.uri;
           final msg = error.response?.data is Map
               ? (error.response?.data as Map)['message']
               : error.message;
-          debugPrint('❌ [BadWallet] ${status ?? 'NO_RESPONSE'} $uri -> $msg');
+          debugPrint('[BadWallet] ${status ?? 'NO_RESPONSE'} $uri -> $msg');
         }
         handler.next(error);
       },
     );
   }
-
-  // ── Verbes HTTP, retournant directement le corps décodé ─────────────────
 
   Future<dynamic> get(
     String path, {

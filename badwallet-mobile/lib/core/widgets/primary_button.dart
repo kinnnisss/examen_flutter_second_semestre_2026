@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Bouton principal réutilisable, avec état de chargement intégré.
-///
-/// Quand [isLoading] est `true`, le bouton est désactivé et affiche un
-/// indicateur — pratique pour les soumissions de formulaires (transfert, etc.).
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,

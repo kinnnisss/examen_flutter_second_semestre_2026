@@ -12,9 +12,6 @@ import '../../providers/auth_provider.dart';
 import '../../providers/history_provider.dart';
 import 'transaction_tile.dart';
 
-/// Onglet "Historique" : liste complète des transactions, avec filtres.
-///
-/// Données réelles via [HistoryProvider] (GET /api/wallets/{phone}/transactions).
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
 
@@ -138,7 +135,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
   }
 }
 
-/// Bandeau résumant les filtres actifs avec une action de réinitialisation.
 class _ActiveFiltersBar extends StatelessWidget {
   const _ActiveFiltersBar({required this.history});
   final HistoryProvider history;
@@ -187,7 +183,6 @@ class _ActiveFiltersBar extends StatelessWidget {
   }
 }
 
-/// Feuille de filtres : type de transaction + plage de dates.
 class _FilterSheet extends StatelessWidget {
   const _FilterSheet();
 

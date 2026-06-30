@@ -3,11 +3,6 @@ import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_constants.dart';
 
-/// Écran temporaire générique pour les fonctionnalités à venir.
-///
-/// Ce widget existe uniquement pour câbler la navigation de base de ce lot.
-/// Chaque feature (auth, dashboard, transfers, bills, history) le remplacera
-/// par son écran réel dans les lots suivants.
 class PlaceholderScreen extends StatelessWidget {
   const PlaceholderScreen({
     super.key,

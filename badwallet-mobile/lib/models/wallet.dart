@@ -1,17 +1,3 @@
-/// Modèle `Wallet`, miroir du `WalletResponse` du backend.
-///
-/// Réponse réelle (GET /api/wallets/{phoneNumber}) :
-/// ```json
-/// {
-///   "id": 1,
-///   "phoneNumber": "+221779998877",
-///   "email": "user@example.com",
-///   "code": "WALLET01",
-///   "currency": "XOF",
-///   "balance": 150000.00,
-///   "createdAt": "2026-06-30T12:00:00"
-/// }
-/// ```
 class Wallet {
   const Wallet({
     required this.id,

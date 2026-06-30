@@ -34,11 +34,23 @@ class HistoryProvider extends ChangeNotifier {
         final da = a.createdAt;
         final db = b.createdAt;
         if (da == null && db == null) return 0;
-        if (da == null) return 1; 
+        if (da == null) return 1;
         if (db == null) return -1;
-        return db.compareTo(da); 
+        return db.compareTo(da);
       });
     return filtered;
+  }
+
+  List<WalletTransaction> get billPayments {
+    return _all.where((t) => t.type == TransactionType.billPayment).toList()
+      ..sort((a, b) {
+        final da = a.createdAt;
+        final db = b.createdAt;
+        if (da == null && db == null) return 0;
+        if (da == null) return 1;
+        if (db == null) return -1;
+        return db.compareTo(da);
+      });
   }
 
   bool _matchesFilters(WalletTransaction t) {
